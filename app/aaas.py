@@ -3,6 +3,13 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
+@app.route("/", methods=["GET"])
+def home(vargs=None):
+    s = '''Hello there stranger! It seems you do not know how to use my AaaS.
+    To learn more about my AaaS, visit https://github.com/aditeyabaral/arithmetic-as-a-service'''
+    return s
+
+
 @app.route("/add/<path:vargs>", methods=["GET"])
 def add(vargs):
     try:
