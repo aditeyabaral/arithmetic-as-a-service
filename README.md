@@ -15,7 +15,7 @@ You can chain together as many values - both integer as well as floating point, 
 
 * To obtain `4 + 2 + 0`, you can use `/add/4/2/0`
 
-* To find the factorial of 5, use `/mul/1/2/3/4/5`
+* To find `4!`, use `/mul/1/2/3/4`
 
 * To find the value of `8 - 24 - 32`, use `/sub/8/24/32`
 
