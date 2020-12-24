@@ -21,9 +21,19 @@ You can chain together as many values - both integer as well as floating point, 
 
 * To find the answer to `32 / 3` use `/div/32/3`
 
+To use in a script, Here is a simple Python example that calculates `5!` using my AaaS
+
+```Python
+>>> import requests
+>>> url = "https://arithmetic-service.herokuapp.com/mul/1/2/3/4/5"
+>>> response = requests.get(url)
+>>> print(response.text)
+>>> '120.0'
+```
+
 # Inspiration to make my own AaaS
 
-Life is everchanging and filled with uncertainty. Sometimes, you do things in life just so that you can look back to it later and regret the bad decisions you made. But this is not one of those ideas.
+Life is everchanging and filled with uncertainty. Sometimes, you do things in life just so that you can look back to it later and regret the bad decisions you made. But this is not one of those decisions.
 
 I thought publishing my AaaS to the world would be a cool idea, and here we are.
 
