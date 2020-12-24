@@ -19,7 +19,7 @@ You can chain together as many values - both integer as well as floating point, 
 
 * To find the value of `8 - 24 - 32`, use `/sub/8/24/32`
 
-* To find the answer to `32 / 3` use `/div/8/24/32`
+* To find the answer to `32 / 3` use `/div/32/3`
 
 # Inspiration to make my own AaaS
 
