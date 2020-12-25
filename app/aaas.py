@@ -1,4 +1,4 @@
-import math
+import utils
 from flask import Flask
 from multiprocessing import Value
 
@@ -19,98 +19,72 @@ def home(*vargs):
 def add(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = numbers[0]
-        for num in numbers[1:]:
-            result += num
-    except:
-        return "Bad request", 400
-    return str(result), 200
+    numbers = vargs.split("/")
+    result = utils.addition(numbers)
+    return result
 
 
 @app.route("/sub/<path:vargs>", methods=["GET"])
 def sub(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = numbers[0]
-        for num in numbers[1:]:
-            result -= num
-    except:
-        return "Bad request", 400
-    return str(result), 200
+    numbers = vargs.split("/")
+    result = utils.subtraction(numbers)
+    return result
 
 
 @app.route("/mul/<path:vargs>", methods=["GET"])
 def mul(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = numbers[0]
-        for num in numbers[1:]:
-            result *= num
-    except:
-        return "Bad request", 400
-    return str(result), 200
+    numbers = vargs.split("/")
+    result = utils.multiplication(numbers)
+    return result
 
 
 @app.route("/div/<path:vargs>", methods=["GET"])
 def div(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = numbers[0]
-        for num in numbers[1:]:
-            result /= num
-    except:
-        return "Bad request", 400
-    return str(result), 200
+    numbers = vargs.split("/")
+    result = utils.division(numbers)
+    return result
 
 
 @app.route("/sin/<path:vargs>", methods=["GET"])
 def sin(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = list()
-        for num in numbers:
-            result.append(str(math.sin(num)))
-    except:
-        return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    numbers = vargs.split("/")
+    result = utils.sine(numbers)
+    return result
 
 
 @app.route("/cos/<path:vargs>", methods=["GET"])
 def cos(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = list()
-        for num in numbers:
-            result.append(str(math.cos(num)))
-    except:
-        return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    numbers = vargs.split("/")
+    result = utils.cosine(numbers)
+    return result
 
 
 @app.route("/tan/<path:vargs>", methods=["GET"])
 def tan(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    try:
-        numbers = list(map(float, vargs.split("/")))
-        result = list()
-        for num in numbers:
-            result.append(str(math.tan(num)))
-    except:
-        return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    numbers = vargs.split("/")
+    result = utils.tangent(numbers)
+    return result
+
+
+@app.route("/fact/<path:vargs>", methods=["GET"])
+def fact(vargs):
+    with COUNTER.get_lock():
+        COUNTER.value += 1
+    numbers = vargs.split("/")
+    result = utils.factorial(numbers)
+    return result
 
 
 if __name__ == "__main__":
