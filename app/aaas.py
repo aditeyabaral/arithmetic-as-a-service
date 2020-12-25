@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def home(*vargs):
     s = f'''Hello there stranger! It seems you do not know how to use my AaaS. 
-    There are currenly {COUNTER.value} clients successfully using my AaaS for their apps.
+    There are currently {COUNTER.value} clients successfully using my AaaS for their apps.
     To learn more about my AaaS, visit https://github.com/aditeyabaral/arithmetic-as-a-service'''
     return s
 
