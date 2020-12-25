@@ -9,13 +9,17 @@ The format of the URL is `https://arithmetic-service.herokuapp.com/<operation>/<
 * `sub`
 * `mul`
 * `div`
+* `sin`
+* `cos`
+* `tan`
+* `fact`
 
 You can chain together as many values - both integer as well as floating point, as needed. Do note that the operation being performed is of the type `operand 1 <operator> operand 2 <operator> operand N`. For example, here is an example request to add
 0 and 1 - `https://arithmetic-service.herokuapp.com/add/0/1`. Attached below are few more examples.
 
 * To obtain `4 + 2 + 0`, you can use `/add/4/2/0`
 
-* To find `4!`, use `/mul/1/2/3/4`
+* To find `4!`, use `/mul/1/2/3/4` or `/fact/4`
 
 * To find the value of `8 - 24 - 32`, use `/sub/8/24/32`
 

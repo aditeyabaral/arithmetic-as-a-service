@@ -1,4 +1,4 @@
-import utils
+import .utils
 from flask import Flask
 from multiprocessing import Value
 
