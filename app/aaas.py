@@ -1,4 +1,4 @@
-import .utils
+from .utils import *
 from flask import Flask
 from multiprocessing import Value
 
@@ -20,7 +20,7 @@ def add(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.addition(numbers)
+    result = addition(numbers)
     return result
 
 
@@ -29,7 +29,7 @@ def sub(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.subtraction(numbers)
+    result = subtraction(numbers)
     return result
 
 
@@ -38,7 +38,7 @@ def mul(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.multiplication(numbers)
+    result = multiplication(numbers)
     return result
 
 
@@ -47,7 +47,7 @@ def div(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.division(numbers)
+    result = division(numbers)
     return result
 
 
@@ -56,7 +56,7 @@ def sin(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.sine(numbers)
+    result = sine(numbers)
     return result
 
 
@@ -65,7 +65,7 @@ def cos(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.cosine(numbers)
+    result = cosine(numbers)
     return result
 
 
@@ -74,7 +74,7 @@ def tan(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.tangent(numbers)
+    result = tangent(numbers)
     return result
 
 
@@ -83,7 +83,7 @@ def fact(vargs):
     with COUNTER.get_lock():
         COUNTER.value += 1
     numbers = vargs.split("/")
-    result = utils.factorial(numbers)
+    result = factorial(numbers)
     return result
 
 
