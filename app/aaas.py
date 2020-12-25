@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    s = f'''Hello there stranger! It seems you do not know how to use my AaaS. There are currenly {COUNTER.value} clients successfully using my AaaS for their apps.
+    s = f'''Hello there stranger! It seems you do not know how to use my AaaS. 
+    There are currenly {COUNTER.value} clients successfully using my AaaS for their apps.
     To learn more about my AaaS, visit https://github.com/aditeyabaral/arithmetic-as-a-service'''
     return s
 
@@ -79,6 +80,34 @@ def sin(vargs):
         result = list()
         for num in numbers:
             result.append(str(math.sin(num)))
+    except:
+        return "Bad request", 400
+    return f"[{', '.join(result)}]", 200
+
+
+@app.route("/cos/<path:vargs>", methods=["GET"])
+def cos(vargs):
+    with COUNTER.get_lock():
+        COUNTER.value += 1
+    try:
+        numbers = list(map(float, vargs.split("/")))
+        result = list()
+        for num in numbers:
+            result.append(str(math.cos(num)))
+    except:
+        return "Bad request", 400
+    return f"[{', '.join(result)}]", 200
+
+
+@app.route("/tan/<path:vargs>", methods=["GET"])
+def tan(vargs):
+    with COUNTER.get_lock():
+        COUNTER.value += 1
+    try:
+        numbers = list(map(float, vargs.split("/")))
+        result = list()
+        for num in numbers:
+            result.append(str(math.tan(num)))
     except:
         return "Bad request", 400
     return f"[{', '.join(result)}]", 200
