@@ -48,7 +48,11 @@ def sine(numbers):
             result.append(str(math.sin(float(num))))
     except:
         return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+
+    if len(result) == 1:
+        return result[0], 200
+    else:
+        return f"[{', '.join(result)}]", 200
 
 
 def cosine(numbers):
@@ -58,7 +62,11 @@ def cosine(numbers):
             result.append(str(math.cos(float(num))))
     except:
         return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    
+    if len(result) == 1:
+        return result[0], 200
+    else:
+        return f"[{', '.join(result)}]", 200
 
 
 def tangent(numbers):
@@ -68,7 +76,11 @@ def tangent(numbers):
             result.append(str(math.tan(float(num))))
     except:
         return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    
+    if len(result) == 1:
+        return result[0], 200
+    else:
+        return f"[{', '.join(result)}]", 200
 
 
 def factorial(numbers):
@@ -78,4 +90,8 @@ def factorial(numbers):
             result.append(str(math.factorial(int(num))))
     except:
         return "Bad request", 400
-    return f"[{', '.join(result)}]", 200
+    
+    if len(result) == 1:
+        return result[0], 200
+    else:
+        return f"[{', '.join(result)}]", 200
