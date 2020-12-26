@@ -1,5 +1,8 @@
 import math
 
+def incrementCounter(COUNTER):
+    with COUNTER.get_lock():
+        COUNTER.value += 1
 
 def addition(numbers):
     try:

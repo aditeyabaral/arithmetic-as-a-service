@@ -17,8 +17,7 @@ def home(*vargs):
 
 @app.route("/add/<path:vargs>", methods=["GET"])
 def add(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = addition(numbers)
     return result
@@ -26,8 +25,7 @@ def add(vargs):
 
 @app.route("/sub/<path:vargs>", methods=["GET"])
 def sub(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = subtraction(numbers)
     return result
@@ -35,8 +33,7 @@ def sub(vargs):
 
 @app.route("/mul/<path:vargs>", methods=["GET"])
 def mul(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = multiplication(numbers)
     return result
@@ -44,8 +41,7 @@ def mul(vargs):
 
 @app.route("/div/<path:vargs>", methods=["GET"])
 def div(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = division(numbers)
     return result
@@ -53,8 +49,7 @@ def div(vargs):
 
 @app.route("/sin/<path:vargs>", methods=["GET"])
 def sin(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = sine(numbers)
     return result
@@ -62,8 +57,7 @@ def sin(vargs):
 
 @app.route("/cos/<path:vargs>", methods=["GET"])
 def cos(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = cosine(numbers)
     return result
@@ -71,8 +65,7 @@ def cos(vargs):
 
 @app.route("/tan/<path:vargs>", methods=["GET"])
 def tan(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = tangent(numbers)
     return result
@@ -80,8 +73,7 @@ def tan(vargs):
 
 @app.route("/fact/<path:vargs>", methods=["GET"])
 def fact(vargs):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
+    incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = factorial(numbers)
     return result
