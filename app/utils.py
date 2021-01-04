@@ -1,8 +1,24 @@
 import math
+from multiprocessing import Value
 
-def incrementCounter(COUNTER):
+COUNTER = Value("i", 0)
+
+
+def incrementCounter():
     with COUNTER.get_lock():
         COUNTER.value += 1
+
+
+def getFunctionResult(function, vargs, **flags):
+    incrementCounter()
+    numbers = vargs.split("/")
+    if not flags:
+        result = function(numbers)
+    else:
+        if function is sortNumbers:
+            result = function(numbers, reverse=flags["reverse"])
+    return result
+
 
 def addition(numbers):
     try:
@@ -65,7 +81,7 @@ def cosine(numbers):
             result.append(str(math.cos(float(num))))
     except:
         return "Bad request", 400
-    
+
     if len(result) == 1:
         return result[0], 200
     else:
@@ -79,7 +95,7 @@ def tangent(numbers):
             result.append(str(math.tan(float(num))))
     except:
         return "Bad request", 400
-    
+
     if len(result) == 1:
         return result[0], 200
     else:
@@ -93,7 +109,7 @@ def factorial(numbers):
             result.append(str(math.factorial(int(num))))
     except:
         return "Bad request", 400
-    
+
     if len(result) == 1:
         return result[0], 200
     else:

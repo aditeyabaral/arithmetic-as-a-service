@@ -1,19 +1,8 @@
 from utils import *
 from flask import Flask
-from multiprocessing import Value
 
-COUNTER = Value("i", 0)
 
 app = Flask(__name__)
-
-
-'''def sortOrder():
-    pass
-'''
-
-
-def getFunctionReference():
-    pass
 
 
 @app.route("/", methods=["GET"])
@@ -26,90 +15,57 @@ def home(*vargs):
 
 @app.route("/add/<path:vargs>", methods=["GET"])
 def add(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = addition(numbers)
-    return result
+    return getFunctionResult(addition, vargs)
 
 
 @app.route("/sub/<path:vargs>", methods=["GET"])
 def sub(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = subtraction(numbers)
-    return result
+    return getFunctionResult(subtraction, vargs)
 
 
 @app.route("/mul/<path:vargs>", methods=["GET"])
 def mul(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = multiplication(numbers)
-    return result
+    return getFunctionResult(multiplication, vargs)
 
 
 @app.route("/div/<path:vargs>", methods=["GET"])
 def div(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = division(numbers)
-    return result
+    return getFunctionResult(division, vargs)
 
 
 @app.route("/sin/<path:vargs>", methods=["GET"])
 def sin(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = sine(numbers)
-    return result
+    return getFunctionResult(sine, vargs)
 
 
 @app.route("/cos/<path:vargs>", methods=["GET"])
 def cos(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = cosine(numbers)
-    return result
+    return getFunctionResult(cosine, vargs)
 
 
 @app.route("/tan/<path:vargs>", methods=["GET"])
 def tan(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = tangent(numbers)
-    return result
+    return getFunctionResult(tangent, vargs)
 
 
 @app.route("/fact/<path:vargs>", methods=["GET"])
 def fact(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = factorial(numbers)
-    return result
+    return getFunctionResult(factorial, vargs)
 
 
-'''@app.route("/sort/<path:vargs>", methods=["GET"])
+@app.route("/sort/<path:vargs>", methods=["GET"])
+def sortOrder(vargs):
+    return getFunctionResult(sortNumbers, vargs)
+
+
+@app.route("/sort/increasing/<path:vargs>", methods=["GET"])
 def sortIncreasingOrder(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = sortNumbers(numbers)
-    return result'''
+    return getFunctionResult(sortNumbers, vargs)
 
 
-@app.route("/sort/inc/<path:vargs>", methods=["GET"])
-def sortIncreasingOrder(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = sortNumbers(numbers)
-    return result
-
-
-@app.route("/sort/dec/<path:vargs>", methods=["GET"])
+@app.route("/sort/decreasing/<path:vargs>", methods=["GET"])
 def sortDecreasingOrder(vargs):
-    incrementCounter(COUNTER)
-    numbers = vargs.split("/")
-    result = sortNumbers(numbers, reverse=True)
-    return result
+    return getFunctionResult(sortNumbers, vargs, reverse=True)
 
 
 if __name__ == "__main__":
