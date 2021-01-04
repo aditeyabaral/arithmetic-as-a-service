@@ -1,10 +1,19 @@
-from .utils import *
+from utils import *
 from flask import Flask
 from multiprocessing import Value
 
 COUNTER = Value("i", 0)
 
 app = Flask(__name__)
+
+
+'''def sortOrder():
+    pass
+'''
+
+
+def getFunctionReference():
+    pass
 
 
 @app.route("/", methods=["GET"])
@@ -76,6 +85,30 @@ def fact(vargs):
     incrementCounter(COUNTER)
     numbers = vargs.split("/")
     result = factorial(numbers)
+    return result
+
+
+'''@app.route("/sort/<path:vargs>", methods=["GET"])
+def sortIncreasingOrder(vargs):
+    incrementCounter(COUNTER)
+    numbers = vargs.split("/")
+    result = sortNumbers(numbers)
+    return result'''
+
+
+@app.route("/sort/inc/<path:vargs>", methods=["GET"])
+def sortIncreasingOrder(vargs):
+    incrementCounter(COUNTER)
+    numbers = vargs.split("/")
+    result = sortNumbers(numbers)
+    return result
+
+
+@app.route("/sort/dec/<path:vargs>", methods=["GET"])
+def sortDecreasingOrder(vargs):
+    incrementCounter(COUNTER)
+    numbers = vargs.split("/")
+    result = sortNumbers(numbers, reverse=True)
     return result
 
 

@@ -98,3 +98,9 @@ def factorial(numbers):
         return result[0], 200
     else:
         return f"[{', '.join(result)}]", 200
+
+
+def sortNumbers(numbers, reverse=False):
+    numbers = list(map(float, numbers))
+    result = list(map(str, sorted(numbers, reverse=reverse)))
+    return f"[{', '.join(result)}]", 200
