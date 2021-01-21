@@ -1,4 +1,5 @@
 import math
+import numpy as np
 from multiprocessing import Value
 
 COUNTER = Value("i", 0)
@@ -120,3 +121,14 @@ def sortNumbers(numbers, reverse=False):
     numbers = list(map(float, numbers))
     result = list(map(str, sorted(numbers, reverse=reverse)))
     return f"[{', '.join(result)}]", 200
+
+def getMatrix(numbers):
+    numbers = list(map(float, numbers))
+    matrix = np.zeros((numbers[0], numbers[1]))
+    pos = 2
+    for i in range(numbers[0]):
+        for j in range(numbers[1]):
+            matrix[i][j] = numbers[pos]
+            pos+=1
+    matrix = matrix.tolist()
+    
