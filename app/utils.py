@@ -131,4 +131,5 @@ def getMatrix(numbers):
             matrix[i][j] = numbers[pos]
             pos+=1
     matrix = matrix.tolist()
+    return matrix
     
