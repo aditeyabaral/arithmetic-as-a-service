@@ -68,5 +68,10 @@ def sortDecreasingOrder(vargs):
     return getFunctionResult(sortNumbers, vargs, reverse=True)
 
 
+@app.route("/matrix/<path:vargs>", methods=["GET"])
+def createMatrix(vargs):
+    return getFunctionResult(getMatrix, vargs)
+
+
 if __name__ == "__main__":
     app.run()

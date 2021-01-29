@@ -1,4 +1,5 @@
 import math
+import json
 import numpy as np
 from multiprocessing import Value
 
@@ -18,6 +19,7 @@ def getFunctionResult(function, vargs, **flags):
     else:
         if function is sortNumbers:
             result = function(numbers, reverse=flags["reverse"])
+    result = json.dumps(result)
     return result
 
 
@@ -28,7 +30,7 @@ def addition(numbers):
             result += float(num)
     except:
         return "Bad request", 400
-    return str(result), 200
+    return result, 200
 
 
 def subtraction(numbers):
@@ -38,7 +40,7 @@ def subtraction(numbers):
             result -= float(num)
     except:
         return "Bad request", 400
-    return str(result), 200
+    return result, 200
 
 
 def multiplication(numbers):
@@ -48,7 +50,7 @@ def multiplication(numbers):
             result *= float(num)
     except:
         return "Bad request", 400
-    return str(result), 200
+    return result, 200
 
 
 def division(numbers):
@@ -58,78 +60,74 @@ def division(numbers):
             result /= float(num)
     except:
         return "Bad request", 400
-    return str(result), 200
+    return result, 200
 
 
 def sine(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(str(math.sin(float(num))))
+            result.append(math.sin(float(num)))
     except:
         return "Bad request", 400
 
     if len(result) == 1:
         return result[0], 200
     else:
-        return f"[{', '.join(result)}]", 200
+        return result, 200
 
 
 def cosine(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(str(math.cos(float(num))))
+            result.append(math.cos(float(num)))
     except:
         return "Bad request", 400
 
     if len(result) == 1:
         return result[0], 200
     else:
-        return f"[{', '.join(result)}]", 200
+        return result, 200
 
 
 def tangent(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(str(math.tan(float(num))))
+            result.append(math.tan(float(num)))
     except:
         return "Bad request", 400
 
     if len(result) == 1:
         return result[0], 200
     else:
-        return f"[{', '.join(result)}]", 200
+        return result, 200
 
 
 def factorial(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(str(math.factorial(int(num))))
+            result.append(math.factorial(int(num)))
     except:
         return "Bad request", 400
 
     if len(result) == 1:
         return result[0], 200
     else:
-        return f"[{', '.join(result)}]", 200
+        return result, 200
 
 
 def sortNumbers(numbers, reverse=False):
     numbers = list(map(float, numbers))
     result = list(map(str, sorted(numbers, reverse=reverse)))
-    return f"[{', '.join(result)}]", 200
+    return result, 200
+
 
 def getMatrix(numbers):
     numbers = list(map(float, numbers))
-    matrix = np.zeros((numbers[0], numbers[1]))
-    pos = 2
-    for i in range(numbers[0]):
-        for j in range(numbers[1]):
-            matrix[i][j] = numbers[pos]
-            pos+=1
-    matrix = matrix.tolist()
-    return matrix
-    
+    ndims = int(numbers[0])
+    dims = [int(numbers[i]) for i in range(1, ndims+1)]
+    matrix = np.reshape(numbers[ndims+1:], dims)
+    return matrix.tolist()
