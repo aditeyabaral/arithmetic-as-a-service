@@ -1,4 +1,4 @@
-from .utils import *
+from utils import *
 from flask import Flask
 
 
@@ -70,7 +70,17 @@ def sortDecreasingOrder(vargs):
 
 @app.route("/matrix/<path:vargs>", methods=["GET"])
 def createMatrix(vargs):
-    return getFunctionResult(getMatrix, vargs)
+    return getFunctionResult(getMatrices, vargs)
+
+
+@app.route("/add-matrix/<path:vargs>", methods=["GET"])
+def additionMatrix(vargs):
+    return getFunctionResult(addMatrices, vargs)
+
+
+@app.route("/sub-matrix/<path:vargs>", methods=["GET"])
+def subtractionMatrix(vargs):
+    return getFunctionResult(subtractMatrices, vargs)
 
 
 if __name__ == "__main__":

@@ -125,9 +125,30 @@ def sortNumbers(numbers, reverse=False):
     return result, 200
 
 
-def getMatrix(numbers):
+'''def getMatrix(numbers):
     numbers = list(map(float, numbers))
     ndims = int(numbers[0])
-    dims = [int(numbers[i]) for i in range(1, ndims+1)]
+    dims = [int(numbers[i]) for i in range(1, 1+ndims)]
     matrix = np.reshape(numbers[ndims+1:], dims)
-    return matrix.tolist()
+    return matrix.tolist()'''
+
+
+def getMatrices(numbers):  # url/nmatrices/ndims/dim1/.../dimn/num1...
+    numbers = list(map(float, numbers))
+    nmatrices = int(numbers[0])
+    ndims = int(numbers[1])
+    dims = [int(numbers[i]) for i in range(2, 2+ndims)]
+    matrix_values = np.split(np.asarray(numbers[2+ndims:]), nmatrices)
+    matrices = [np.reshape(m, dims).tolist() for m in matrix_values]
+    return matrices
+
+
+def addMatrices(numbers):
+    matrices = getMatrices(numbers)
+    result = np.add(*matrices).tolist()
+    return result
+
+def subtractMatrices(numbers):
+    matrices = getMatrices(numbers)
+    result = np.subtract(*matrices).tolist()
+    return result
