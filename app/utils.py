@@ -1,4 +1,3 @@
-import math
 import json
 import numpy as np
 from multiprocessing import Value
@@ -67,7 +66,7 @@ def sine(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(math.sin(float(num)))
+            result.append(np.sin(float(num)))
     except:
         return "Bad request", 400
 
@@ -81,7 +80,7 @@ def cosine(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(math.cos(float(num)))
+            result.append(np.cos(float(num)))
     except:
         return "Bad request", 400
 
@@ -95,7 +94,7 @@ def tangent(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(math.tan(float(num)))
+            result.append(np.tan(float(num)))
     except:
         return "Bad request", 400
 
@@ -109,7 +108,7 @@ def factorial(numbers):
     try:
         result = list()
         for num in numbers:
-            result.append(math.factorial(int(num)))
+            result.append(np.factorial(int(num)))
     except:
         return "Bad request", 400
 
