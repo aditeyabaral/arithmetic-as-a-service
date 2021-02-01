@@ -13,123 +13,105 @@ def incrementCounter():
 def getFunctionResult(function, vargs, **flags):
     incrementCounter()
     numbers = vargs.split("/")
-    if not flags:
-        result = function(numbers)
-    else:
-        if function is sortNumbers:
-            result = function(numbers, reverse=flags["reverse"])
-    result = json.dumps(result)
-    return result
+    try:
+        if not flags:
+            result = function(numbers)
+        else:
+            if function is sortNumbers:
+                result = function(numbers, reverse=flags["reverse"])
+        result = json.dumps(result)
+        return result, 200
+    except Exception as e:
+        print(str(e))   # should I return this?
+        return "Bad request", 400
 
 
 def addition(numbers):
-    try:
-        result = float(numbers[0])
-        for num in numbers[1:]:
-            result += float(num)
-    except:
-        return "Bad request", 400
-    return result, 200
+    result = float(numbers[0])
+    for num in numbers[1:]:
+        result += float(num)
+    return result
 
 
 def subtraction(numbers):
-    try:
-        result = float(numbers[0])
-        for num in numbers[1:]:
-            result -= float(num)
-    except:
-        return "Bad request", 400
-    return result, 200
+    result = float(numbers[0])
+    for num in numbers[1:]:
+        result -= float(num)
+    return result
 
 
 def multiplication(numbers):
-    try:
-        result = float(numbers[0])
-        for num in numbers[1:]:
-            result *= float(num)
-    except:
-        return "Bad request", 400
-    return result, 200
+    result = float(numbers[0])
+    for num in numbers[1:]:
+        result *= float(num)
+    return result
 
 
 def division(numbers):
-    try:
-        result = float(numbers[0])
-        for num in numbers[1:]:
-            result /= float(num)
-    except:
-        return "Bad request", 400
-    return result, 200
+    result = float(numbers[0])
+    for num in numbers[1:]:
+        result /= float(num)
+    return result
 
 
 def sine(numbers):
-    try:
-        result = list()
-        for num in numbers:
-            result.append(np.sin(float(num)))
-    except:
-        return "Bad request", 400
+    result = list()
+    for num in numbers:
+        result.append(np.sin(float(num)))
 
     if len(result) == 1:
-        return result[0], 200
+        return result[0]
     else:
-        return result, 200
+        return result
 
 
 def cosine(numbers):
-    try:
-        result = list()
-        for num in numbers:
-            result.append(np.cos(float(num)))
-    except:
-        return "Bad request", 400
+    result = list()
+    for num in numbers:
+        result.append(np.cos(float(num)))
 
     if len(result) == 1:
-        return result[0], 200
+        return result[0]
     else:
-        return result, 200
+        return result
 
 
 def tangent(numbers):
-    try:
-        result = list()
-        for num in numbers:
-            result.append(np.tan(float(num)))
-    except:
-        return "Bad request", 400
+    result = list()
+    for num in numbers:
+        result.append(np.tan(float(num)))
 
     if len(result) == 1:
-        return result[0], 200
+        return result[0]
     else:
-        return result, 200
+        return result
 
 
 def factorial(numbers):
-    try:
-        result = list()
-        for num in numbers:
-            result.append(np.factorial(int(num)))
-    except:
-        return "Bad request", 400
+    result = list()
+    for num in numbers:
+        result.append(np.factorial(int(num)))
 
     if len(result) == 1:
-        return result[0], 200
+        return result[0]
     else:
-        return result, 200
+        return result
 
 
 def sortNumbers(numbers, reverse=False):
     numbers = list(map(float, numbers))
-    result = list(map(str, sorted(numbers, reverse=reverse)))
-    return result, 200
+    result = sorted(numbers, reverse=reverse)
+    return result
 
 
-'''def getMatrix(numbers):
-    numbers = list(map(float, numbers))
-    ndims = int(numbers[0])
-    dims = [int(numbers[i]) for i in range(1, 1+ndims)]
-    matrix = np.reshape(numbers[ndims+1:], dims)
-    return matrix.tolist()'''
+def sortNumbersIncreasing(numbers):
+    result = sortNumbers(numbers)
+    return result
+
+
+def sortNumbersDecreasing(numbers):
+    result = sortNumbers(numbers, reverse=True)
+    return result
 
 
 def getMatrices(numbers):  # url/nmatrices/ndims/dim1/.../dimn/num1...
@@ -139,13 +121,18 @@ def getMatrices(numbers):  # url/nmatrices/ndims/dim1/.../dimn/num1...
     dims = [int(numbers[i]) for i in range(2, 2+ndims)]
     matrix_values = np.split(np.asarray(numbers[2+ndims:]), nmatrices)
     matrices = [np.reshape(m, dims).tolist() for m in matrix_values]
-    return matrices
+
+    if nmatrices == 1:
+        return matrices[0]
+    else:
+        return matrices
 
 
 def addMatrices(numbers):
     matrices = getMatrices(numbers)
     result = np.add(*matrices).tolist()
     return result
+
 
 def subtractMatrices(numbers):
     matrices = getMatrices(numbers)
