@@ -178,31 +178,27 @@ def integrateExpressionDefinite(numbers):
         expression, (variable_to_integrate, limit_lower, limit_upper))
     return str(integral_value)
 
-# url/exp/b1/e1/b2/e2/b3/e3
+# url/exp/e/b1/b2/b3/.../bk
 def exponent(numbers):
     numbers = list(map(float, numbers))
+    e = numbers[0]
+    bases = numbers[1:]
     result = list()
-    i = 0
-    while i<len(numbers):
-        b = numbers[i]
-        e = numbers[i+1]
+    for b in bases:
         result.append(b**e)
-        i += 2
     if len(result) == 1:
         return result[0]
     else:
         return result
 
-# url/log/n1/b1/n2/b2/n3/b3/..
+# url/log/b/n1/n2/n3/../nk
 def logarithm(numbers):
     numbers = list(map(float, numbers))
+    base = numbers[0]
+    nums = numbers[1:]
     result = list()
-    i = 0
-    while i<len(numbers):
-        n = numbers[i]
-        b = numbers[i+1]
-        result.append(np.log10(n)/np.log10(b))
-        i += 2
+    for n in numbers:
+        result.append(np.log10(n)/np.log10(base))
     if len(result) == 1:
         return result[0]
     else:
