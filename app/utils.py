@@ -177,3 +177,24 @@ def integrateExpressionDefinite(numbers):
     integral_value = integrate(
         expression, (variable_to_integrate, limit_lower, limit_upper))
     return str(integral_value)
+
+# url/exp/base/power
+def exponent(numbers):
+    base = float(numbers[0])
+    exp = float(numbers[1])
+    return np.power(base, exp)
+
+def logarithm(numbers):
+    num = float(numbers[0])
+    base = float(numbers[1])
+    if num < 0.0:
+        return "Logarithm of a negative value to any base is not defined"
+    else:
+        return np.log10(num)/np.log10(base)
+
+def natural_log(number):
+    num = float(numbers[0])
+    if num < 0.0:
+        return "Logarithm of a negative value to any base is not defined"
+    else:
+        return np.log(num)
