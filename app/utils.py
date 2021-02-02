@@ -178,17 +178,42 @@ def integrateExpressionDefinite(numbers):
         expression, (variable_to_integrate, limit_lower, limit_upper))
     return str(integral_value)
 
-# url/exp/base/power
+# url/exp/b1/e1/b2/e2/b3/e3
 def exponent(numbers):
-    base = float(numbers[0])
-    exp = float(numbers[1])
-    return np.power(base, exp)
+    numbers = list(map(float, numbers))
+    result = list()
+    i = 0
+    while i<len(numbers):
+        b = numbers[i]
+        e = numbers[i+1]
+        result.append(b**e)
+        i += 2
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
 
+# url/log/n1/b1/n2/b2/n3/b3/..
 def logarithm(numbers):
-    num = float(numbers[0])
-    base = float(numbers[1])
-    return np.log10(num)/np.log10(base)
+    numbers = list(map(float, numbers))
+    result = list()
+    i = 0
+    while i<len(numbers):
+        n = numbers[i]
+        b = numbers[i+1]
+        result.append(np.log10(n)/np.log10(b))
+        i += 2
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
 
-def natural_log(number):
-    num = float(numbers[0])
-    return np.log(num)
+def natural_log(numbers):
+    numbers = list(map(float, numbers))
+    result = list()
+    for num in numbers:
+        result.append(np.log(num))
+    if len(result)==1:
+        return result[0]
+    else:
+        return result
