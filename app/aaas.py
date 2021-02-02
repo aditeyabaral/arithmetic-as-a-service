@@ -13,13 +13,16 @@ function_mapper = {
     "sin": sine,
     "cos": cosine,
     "tan": tangent,
-    "fact": factorial,
+    "fact": factorialNumber,
     "sort": sortNumbersIncreasing,
     "sort-inc": sortNumbersIncreasing,
     "sort-dec": sortNumbersDecreasing,
     "mat": getMatrices,
     "mat-add": addMatrices,
-    "mat-sub": subtractMatrices
+    "mat-sub": subtractMatrices,
+    "diff": differentiateExpression,
+    "int-def": integrateExpressionDefinite,
+    "int-indef": integrateExpressionIndefinite
 
 }
 
@@ -52,6 +55,9 @@ def home(*vargs):
 @app.route("/mat/<path:vargs>", methods=["GET"])
 @app.route("/mat-add/<path:vargs>", methods=["GET"])
 @app.route("/mat-sub/<path:vargs>", methods=["GET"])
+@app.route("/diff/<path:vargs>", methods=["GET"])
+@app.route("/int-def/<path:vargs>", methods=["GET"])
+@app.route("/int-indef/<path:vargs>", methods=["GET"])
 def call(vargs):
     function_name, function_reference = getFunctionCall(flask.request.base_url)
     return getFunctionResult(function_reference, vargs)

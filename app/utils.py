@@ -1,5 +1,7 @@
 import json
+import string
 import numpy as np
+from sympy import *
 from multiprocessing import Value
 
 COUNTER = Value("i", 0)
@@ -87,7 +89,7 @@ def tangent(numbers):
         return result
 
 
-def factorial(numbers):
+def factorialNumber(numbers):
     result = list()
     for num in numbers:
         result.append(np.factorial(int(num)))
@@ -138,3 +140,40 @@ def subtractMatrices(numbers):
     matrices = getMatrices(numbers)
     result = np.subtract(*matrices).tolist()
     return result
+
+
+# url/diff/variable_to_differentiate/order/expression
+def differentiateExpression(numbers):
+    variable_to_differentiate = Symbol(numbers[0])
+    order = int(numbers[1])
+    expression = numbers[2]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    derivative = diff(expression, variable_to_differentiate, order)
+    return str(derivative)
+
+
+# url/int-def/variable_to_integrate/expression
+def integrateExpressionIndefinite(numbers):
+    variable_to_integrate = Symbol(numbers[0])
+    expression = numbers[1]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    integral = integrate(expression, variable_to_integrate)
+    return str(integral)
+
+
+# url/int-def/variable_to_integrate/low/high/expression
+def integrateExpressionDefinite(numbers):
+    variable_to_integrate = Symbol(numbers[0])
+    limit_lower = float(numbers[1])
+    limit_upper = float(numbers[2])
+    expression = numbers[3]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    integral_value = integrate(
+        expression, (variable_to_integrate, limit_lower, limit_upper))
+    return str(integral_value)
