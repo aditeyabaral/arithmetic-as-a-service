@@ -187,14 +187,8 @@ def exponent(numbers):
 def logarithm(numbers):
     num = float(numbers[0])
     base = float(numbers[1])
-    if num < 0.0:
-        return "Logarithm of a negative value to any base is not defined"
-    else:
-        return np.log10(num)/np.log10(base)
+    return np.log10(num)/np.log10(base)
 
 def natural_log(number):
     num = float(numbers[0])
-    if num < 0.0:
-        return "Logarithm of a negative value to any base is not defined"
-    else:
-        return np.log(num)
+    return np.log(num)
