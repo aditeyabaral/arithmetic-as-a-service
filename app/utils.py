@@ -154,7 +154,7 @@ def differentiateExpression(numbers):
     return str(derivative)
 
 
-# url/int-def/variable_to_integrate/expression
+# url/int-indef/variable_to_integrate/expression
 def integrateExpressionIndefinite(numbers):
     variable_to_integrate = Symbol(numbers[0])
     expression = numbers[1]
