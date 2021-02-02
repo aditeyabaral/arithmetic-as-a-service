@@ -1,6 +1,6 @@
 import flask
 from flask import Flask
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -22,8 +22,10 @@ function_mapper = {
     "mat-sub": subtractMatrices,
     "diff": differentiateExpression,
     "int-def": integrateExpressionDefinite,
-    "int-indef": integrateExpressionIndefinite
-
+    "int-indef": integrateExpressionIndefinite,
+    "exp": exponent, 
+    "log": logarithm, 
+    "ln": natural_log
 }
 
 
@@ -58,6 +60,9 @@ def home(*vargs):
 @app.route("/diff/<path:vargs>", methods=["GET"])
 @app.route("/int-def/<path:vargs>", methods=["GET"])
 @app.route("/int-indef/<path:vargs>", methods=["GET"])
+@app.route("/exp/<path:vargs>", methods=["GET"])
+@app.route("/log/<path:vargs>", methods=["GET"])
+@app.route("/ln/<path:vargs>", methods=["GET"])
 def call(vargs):
     function_name, function_reference = getFunctionCall(flask.request.base_url)
     return getFunctionResult(function_reference, vargs)

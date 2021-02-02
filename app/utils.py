@@ -177,3 +177,39 @@ def integrateExpressionDefinite(numbers):
     integral_value = integrate(
         expression, (variable_to_integrate, limit_lower, limit_upper))
     return str(integral_value)
+
+# url/exp/e/b1/b2/b3/.../bk
+def exponent(numbers):
+    numbers = list(map(float, numbers))
+    e = numbers[0]
+    bases = numbers[1:]
+    result = list()
+    for b in bases:
+        result.append(b**e)
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
+
+# url/log/b/n1/n2/n3/../nk
+def logarithm(numbers):
+    numbers = list(map(float, numbers))
+    base = numbers[0]
+    nums = numbers[1:]
+    result = list()
+    for n in numbers:
+        result.append(np.log10(n)/np.log10(base))
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
+
+def natural_log(numbers):
+    numbers = list(map(float, numbers))
+    result = list()
+    for num in numbers:
+        result.append(np.log(num))
+    if len(result)==1:
+        return result[0]
+    else:
+        return result
