@@ -1,35 +1,34 @@
 import flask
 from flask import Flask
-from . import utils
-# from .utils import *
+from .utils import *
 
 
 app = Flask(__name__)
 
 function_mapper = {
-    "add": utils.addition,
-    # "sub": subtraction,
-    # "mul": multiplication,
-    # "div": division,
-    # "sin": sine,
-    # "cos": cosine,
-    # "tan": tangent,
-    # "fact": factorialNumber,
-    # "exp": exponent,
-    # "log": logarithm,
-    # "ln": natural_log,
-    # "sort": sortNumbersIncreasing,
-    # "sort-inc": sortNumbersIncreasing,
-    # "sort-dec": sortNumbersDecreasing,
-    # "mat": getMatrices,
-    # "mat-add": addMatrices,
-    # "mat-sub": subtractMatrices,
-    # "diff": differentiateExpression,
-    # "int-def": integrateExpressionDefinite,
-    # "int-indef": integrateExpressionIndefinite,
-    # "limit": getLimit,
-    # "series": getSeries,
-    # "fourier": getFourierSeries
+    "add": addition
+    "sub": subtraction,
+    "mul": multiplication,
+    "div": division,
+    "sin": sine,
+    "cos": cosine,
+    "tan": tangent,
+    "fact": factorialNumber,
+    "exp": exponent,
+    "log": logarithm,
+    "ln": natural_log,
+    "sort": sortNumbersIncreasing,
+    "sort-inc": sortNumbersIncreasing,
+    "sort-dec": sortNumbersDecreasing,
+    "mat": getMatrices,
+    "mat-add": addMatrices,
+    "mat-sub": subtractMatrices,
+    "diff": differentiateExpression,
+    "int-def": integrateExpressionDefinite,
+    "int-indef": integrateExpressionIndefinite,
+    "limit": getLimit,
+    "series": getSeries,
+    "fourier": getFourierSeries
 }
 
 
