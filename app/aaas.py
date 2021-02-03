@@ -52,6 +52,14 @@ def home(*vargs):
     return result, 200
 
 
+@app.route("/site-stats", methods=["GET"])
+def getStats(*vargs):
+    with open("record.txt", "r") as record_file:
+        records = record_file.read().strip().split('\n')
+        content = "<br/>".join(records)
+        return content, 200
+
+
 @app.route("/add/<path:vargs>", methods=["GET"])
 @app.route("/sub/<path:vargs>", methods=["GET"])
 @app.route("/mul/<path:vargs>", methods=["GET"])

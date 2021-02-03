@@ -31,7 +31,7 @@ def getFunctionResult(function, vargs, **flags):
         return result, 200
     except Exception as e:
         print(str(e))   # should I return this?
-        return f"Bad request: {e}", 400 # should I also call home page?
+        return f"Bad request: {e}", 400  # should I also call home page?
 
 
 def addition(numbers):
