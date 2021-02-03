@@ -6,7 +6,7 @@ from .utils import *
 app = Flask(__name__)
 
 function_mapper = {
-    "add": addition
+    "add": addition,
     "sub": subtraction,
     "mul": multiplication,
     "div": division,
