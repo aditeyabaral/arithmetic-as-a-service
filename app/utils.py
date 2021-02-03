@@ -2,18 +2,24 @@ import json
 import string
 import numpy as np
 from sympy import *
+from datetime import datetime
 from multiprocessing import Value
 
 COUNTER = Value("i", 0)
 
 
-def incrementCounter():
+def incrementCounter(function_name):
     with COUNTER.get_lock():
         COUNTER.value += 1
+    time = datetime.now()
+    current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
+    current_timezone = str(time.astimezone().tzinfo)
+    access_time = f"{current_time} {current_timezone} --- {function_name}\n"
+    with open("record.txt", "a") as record_file:
+        record_file.write(access_time)
 
 
 def getFunctionResult(function, vargs, **flags):
-    incrementCounter()
     numbers = vargs.split("/")
     try:
         if not flags:
@@ -25,7 +31,7 @@ def getFunctionResult(function, vargs, **flags):
         return result, 200
     except Exception as e:
         print(str(e))   # should I return this?
-        return "Bad request", 400
+        return f"Bad request: {e}", 400 # should I also call home page?
 
 
 def addition(numbers):

@@ -40,8 +40,14 @@ def getFunctionCall(url):
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    result = f'''Hello there stranger! It seems you do not know how to use my AaaS. 
-    There are currently {COUNTER.value} clients successfully using my AaaS for their apps.
+    incrementCounter("home")
+    with open("record.txt", "a+") as record_file:
+        total_accesses = len(record_file.read().strip().split('\n'))
+    result = f'''Hello stranger!<br/>
+    It seems you do not know how to use my AaaS.<br/>
+    My AaaS has been used by over {total_accesses} clients for their daily needs.
+    In fact, there are currently {COUNTER.value} active clients successfully using my AaaS for their applications!<br/>
+    What are you waiting for? Join all these developers and start useing my AaaS today!<br/>
     To learn more about my AaaS, visit https://github.com/aditeyabaral/arithmetic-as-a-service'''
     return result, 200
 
@@ -70,7 +76,8 @@ def home(*vargs):
 @app.route("/series/<path:vargs>", methods=["GET"])
 @app.route("/fourier/<path:vargs>", methods=["GET"])
 def call(vargs):
-    _, function_reference = getFunctionCall(flask.request.base_url)
+    function_name, function_reference = getFunctionCall(flask.request.base_url)
+    incrementCounter(function_name)
     return getFunctionResult(function_reference, vargs)
 
 
