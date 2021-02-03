@@ -186,7 +186,7 @@ def natural_log(numbers):
 def differentiateExpression(numbers):
     variable_to_differentiate = Symbol(numbers[0])
     order = int(numbers[1])
-    expression = numbers[2]
+    expression = "/".join(numbers[2:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
@@ -197,7 +197,7 @@ def differentiateExpression(numbers):
 # url/int-indef/variable_to_integrate/expression
 def integrateExpressionIndefinite(numbers):
     variable_to_integrate = Symbol(numbers[0])
-    expression = numbers[1]
+    expression = "/".join(numbers[1:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
@@ -210,7 +210,7 @@ def integrateExpressionDefinite(numbers):
     variable_to_integrate = Symbol(numbers[0])
     limit_lower = float(numbers[1])
     limit_upper = float(numbers[2])
-    expression = numbers[3]
+    expression = "/".join(numbers[3:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
@@ -221,6 +221,7 @@ def integrateExpressionDefinite(numbers):
 
 # url/limit/variable_to_limit/limit_value/expression
 def getLimit(numbers):
+    print(numbers)
     variable_to_limit = Symbol(numbers[0])
     limit_value = numbers[1]
 
@@ -234,7 +235,7 @@ def getLimit(numbers):
         side = '+'
         limit_value = float(limit_value)
 
-    expression = numbers[2]
+    expression = "/".join(numbers[2:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
@@ -258,7 +259,7 @@ def getSeries(numbers):
         side = '+'
         x0 = float(x0)
 
-    expression = numbers[3]
+    expression = "/".join(numbers[3:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
@@ -272,7 +273,7 @@ def getFourierSeries(numbers):
     n_terms = int(numbers[1])
     limit_lower = float(numbers[2])
     limit_upper = float(numbers[3])
-    expression = numbers[4]
+    expression = "/".join(numbers[4:])
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
