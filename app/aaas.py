@@ -44,7 +44,6 @@ def home(*vargs):
     with open("record.txt", "r") as record_file:
         accesses = record_file.read().strip().split('\n')
         total_accesses = len(accesses)
-        print(accesses, total_accesses)
     result = f'''Hello stranger!<br/>
     It seems you do not know how to use my AaaS.<br/>
     My AaaS has been used by over {total_accesses} clients for their daily needs.
@@ -54,8 +53,8 @@ def home(*vargs):
     return result, 200
 
 
-@app.route("/site-stats", methods=["GET"])
-def getStats(*vargs):
+@app.route("/logging", methods=["GET"])
+def getLogging(*vargs):
     with open("record.txt", "r") as record_file:
         records = record_file.read().strip().split('\n')
         content = "<br/>".join(records)
