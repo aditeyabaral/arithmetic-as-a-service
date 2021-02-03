@@ -216,7 +216,7 @@ def integrateExpressionDefinite(numbers):
     locals().update(expression_variables)
     integral_value = integrate(
         expression, (variable_to_integrate, limit_lower, limit_upper))
-    return str(integral_value)  # check type and return
+    return str(integral_value)  # check type and return - can result in numeric result or equation
 
 
 # url/limit/variable_to_limit/limit_value/expression
@@ -262,7 +262,7 @@ def getSeries(numbers):
     expression_variables = {ch: Symbol(
         ch) for ch in expression if ch in string.ascii_letters}
     locals().update(expression_variables)
-    result = str(series(expression, variable_in_series, x0, n, dir=side))
+    result = str(series(expression, variable_in_series, x0, n, dir=side))   # take n_terms as input?
     return result
 
 
