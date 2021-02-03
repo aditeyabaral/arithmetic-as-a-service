@@ -43,6 +43,7 @@ def home(*vargs):
     incrementCounter("home")
     with open("record.txt", "a+") as record_file:
         total_accesses = len(record_file.read().strip().split('\n'))
+        print(total_accesses)
     result = f'''Hello stranger!<br/>
     It seems you do not know how to use my AaaS.<br/>
     My AaaS has been used by over {total_accesses} clients for their daily needs.
