@@ -14,6 +14,9 @@ function_mapper = {
     "cos": cosine,
     "tan": tangent,
     "fact": factorialNumber,
+    "exp": exponent, 
+    "log": logarithm, 
+    "ln": natural_log,
     "sort": sortNumbersIncreasing,
     "sort-inc": sortNumbersIncreasing,
     "sort-dec": sortNumbersDecreasing,
@@ -23,9 +26,9 @@ function_mapper = {
     "diff": differentiateExpression,
     "int-def": integrateExpressionDefinite,
     "int-indef": integrateExpressionIndefinite,
-    "exp": exponent, 
-    "log": logarithm, 
-    "ln": natural_log
+    "limit": getLimit,
+    "series": getSeries,
+    "fourier": getFourierSeries
 }
 
 
@@ -51,6 +54,9 @@ def home(*vargs):
 @app.route("/cos/<path:vargs>", methods=["GET"])
 @app.route("/tan/<path:vargs>", methods=["GET"])
 @app.route("/fact/<path:vargs>", methods=["GET"])
+@app.route("/exp/<path:vargs>", methods=["GET"])
+@app.route("/log/<path:vargs>", methods=["GET"])
+@app.route("/ln/<path:vargs>", methods=["GET"])
 @app.route("/sort/<path:vargs>", methods=["GET"])
 @app.route("/sort-inc/<path:vargs>", methods=["GET"])
 @app.route("/sort-dec/<path:vargs>", methods=["GET"])
@@ -60,11 +66,11 @@ def home(*vargs):
 @app.route("/diff/<path:vargs>", methods=["GET"])
 @app.route("/int-def/<path:vargs>", methods=["GET"])
 @app.route("/int-indef/<path:vargs>", methods=["GET"])
-@app.route("/exp/<path:vargs>", methods=["GET"])
-@app.route("/log/<path:vargs>", methods=["GET"])
-@app.route("/ln/<path:vargs>", methods=["GET"])
+@app.route("/limit/<path:vargs>", methods=["GET"])
+@app.route("/series/<path:vargs>", methods=["GET"])
+@app.route("/fourier/<path:vargs>", methods=["GET"])
 def call(vargs):
-    function_name, function_reference = getFunctionCall(flask.request.base_url)
+    _, function_reference = getFunctionCall(flask.request.base_url)
     return getFunctionResult(function_reference, vargs)
 
 

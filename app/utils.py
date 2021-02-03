@@ -142,6 +142,46 @@ def subtractMatrices(numbers):
     return result
 
 
+# url/exp/e/b1/b2/b3/.../bk
+def exponent(numbers):
+    e = float(numbers[0])
+    bases = numbers[1:]
+    result = list()
+    for b in bases:
+        result.append(float(b)**e)
+
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
+
+# url/log/b/n1/n2/n3/../nk
+
+
+def logarithm(numbers):
+    base = float(numbers[0])
+    nums = numbers[1:]
+    result = list()
+    for n in nums:
+        result.append(np.log10(float(n))/np.log10(base))
+
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
+
+
+def natural_log(numbers):
+    result = list()
+    for num in numbers:
+        result.append(np.log(float(num)))
+
+    if len(result) == 1:
+        return result[0]
+    else:
+        return result
+
+
 # url/diff/variable_to_differentiate/order/expression
 def differentiateExpression(numbers):
     variable_to_differentiate = Symbol(numbers[0])
@@ -176,40 +216,66 @@ def integrateExpressionDefinite(numbers):
     locals().update(expression_variables)
     integral_value = integrate(
         expression, (variable_to_integrate, limit_lower, limit_upper))
-    return str(integral_value)
+    return str(integral_value)  # check type and return
 
-# url/exp/e/b1/b2/b3/.../bk
-def exponent(numbers):
-    numbers = list(map(float, numbers))
-    e = numbers[0]
-    bases = numbers[1:]
-    result = list()
-    for b in bases:
-        result.append(b**e)
-    if len(result) == 1:
-        return result[0]
-    else:
-        return result
 
-# url/log/b/n1/n2/n3/../nk
-def logarithm(numbers):
-    numbers = list(map(float, numbers))
-    base = numbers[0]
-    nums = numbers[1:]
-    result = list()
-    for n in numbers:
-        result.append(np.log10(n)/np.log10(base))
-    if len(result) == 1:
-        return result[0]
-    else:
-        return result
+# url/limit/variable_to_limit/limit_value/expression
+def getLimit(numbers):
+    variable_to_limit = Symbol(numbers[0])
+    limit_value = numbers[1]
 
-def natural_log(numbers):
-    numbers = list(map(float, numbers))
-    result = list()
-    for num in numbers:
-        result.append(np.log(num))
-    if len(result)==1:
-        return result[0]
+    if '+' in limit_value:
+        side = '+'
+        limit_value = float(limit_value[:-1])
+    elif '-' in limit_value:
+        side = '-'
+        limit_value = float(limit_value[:-1])
     else:
-        return result
+        side = '+'
+        limit_value = float(limit_value)
+
+    expression = numbers[2]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    result = float(limit(expression, variable_to_limit, limit_value, dir=side))
+    return result
+
+
+# url/series/variable_in_series/x0/n/expression
+def getSeries(numbers):
+    variable_in_series = Symbol(numbers[0])
+    x0 = numbers[1]
+    n = int(numbers[2])
+
+    if '+' in x0:
+        side = '+'
+        x0 = float(x0[:-1])
+    elif '-' in x0:
+        side = '-'
+        x0 = float(x0[:-1])
+    else:
+        side = '+'
+        x0 = float(x0)
+
+    expression = numbers[3]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    result = str(series(expression, variable_in_series, x0, n, dir=side))
+    return result
+
+
+# url/fourier/variable_in_series/n_terms/lower_limit/upper_limit/expression
+def getFourierSeries(numbers):
+    variable_in_series = Symbol(numbers[0])
+    n_terms = int(numbers[1])
+    limit_lower = float(numbers[2])
+    limit_upper = float(numbers[3])
+    expression = numbers[4]
+    expression_variables = {ch: Symbol(
+        ch) for ch in expression if ch in string.ascii_letters}
+    locals().update(expression_variables)
+    fourier_value = fourier_series(
+        expression, (variable_in_series, limit_lower, limit_upper)).truncate(n_terms)
+    return str(fourier_value)
