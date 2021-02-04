@@ -84,12 +84,11 @@ def home(*vargs):
 
 @app.route("/logging", methods=["GET"])
 def getLogging(*vargs):
-    '''with open("record.txt", "r") as record_file:
-        records = record_file.read().strip().split('\n')'''
     result = db.session.query(Record).all()
-    print(result)
-    #content = "<br/>".join(records)
-    #return content, 200
+    result_list = list(map(lambda x: f"{x.time} --- {x.site}", result))
+    print(result_list)
+    content = "<br/>".join(result_list)
+    return content, 200
 
 
 @app.route("/add/<path:vargs>", methods=["GET"])
