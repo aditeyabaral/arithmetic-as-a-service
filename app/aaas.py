@@ -1,7 +1,8 @@
 import os
 import flask
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_table import Table, Col
 from .utils import *
 
 
@@ -49,6 +50,12 @@ class Record(db.Model):
         self.site = site_name
 
 
+class loggingInfoTable(Table):
+    __id = Col("__id", show=False)
+    time = Col("time")
+    site = Col("site")
+
+
 def getFunctionCall(url):
     function_name = url.split("/")[3]
     function_reference = function_mapper[function_name]
@@ -85,11 +92,9 @@ def home(*vargs):
 @app.route("/logging", methods=["GET"])
 def getLogging(*vargs):
     result = db.session.query(Record).all()
-    result_list = list(map(lambda x: f"{x.time} UTC&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;{x.site}", result))
-    result_list.insert(0, "Timestamp&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Site")
-    result_list.insert(1, "------------------------------------------------")
-    content = "<br/>".join(result_list)
-    return content, 200
+    table = loggingInfoTable(result)
+    table.border = True
+    return render_template("table.html", table=table), 200
 
 
 @app.route("/add/<path:vargs>", methods=["GET"])
