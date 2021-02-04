@@ -85,8 +85,9 @@ def home(*vargs):
 @app.route("/logging", methods=["GET"])
 def getLogging(*vargs):
     result = db.session.query(Record).all()
-    result_list = list(map(lambda x: f"{x.time} --- {x.site}", result))
-    print(result_list)
+    result_list = list(map(lambda x: f"{x.time} UTC\t---\t{x.site}", result))
+    result_list.insert(0, "Timestamp\t\t\t\t\t\t| Site")
+    result_list.insert(1, "------------------------------------------------")
     content = "<br/>".join(result_list)
     return content, 200
 
