@@ -1,5 +1,4 @@
 import flask
-import platform
 from datetime import datetime
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
