@@ -1,9 +1,10 @@
 import flask
 import platform
-from flask import Flask, render_template
+from datetime import datetime
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -42,16 +43,19 @@ db = SQLAlchemy(app)
 class Record(db.Model):
     __tablename__ = "logging"
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    ip = db.Column(db.String(20), nullable=False, default=getIPAddress)
-    mac = db.Column(db.String(50), nullable=False, default=getMACAddress)
-    name = db.Column(db.String(30), nullable=False, default=platform.node)
-    platform = db.Column(db.String(30), nullable=False,
-                         default=platform.system)
+    time = db.Column(db.DateTime, nullable=False)
+    ip = db.Column(db.String(20), nullable=False)
+    # name = db.Column(db.String(100), nullable=False)  # get language, version as well?
+    browser = db.Column(db.String(100), nullable=False)
+    platform = db.Column(db.String(30), nullable=False)
     site = db.Column(db.String(15), nullable=False)
 
     def __init__(self, site_name):
         self.site = site_name
+        self.time = datetime.utcnow()
+        self.ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+        self.platform = request.user_agent.platform
+        self.browser = request.user_agent.browser
 
 
 class loggingInfoTable(Table):

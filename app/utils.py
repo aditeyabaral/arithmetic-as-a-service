@@ -1,24 +1,11 @@
 import re
 import json
 import string
-import uuid
-import requests
 import numpy as np
 from sympy import *
-from datetime import datetime
 from multiprocessing import Value
 
 COUNTER = Value("i", 0)
-
-
-def getIPAddress():
-    return requests.get('https://api.ipify.org').text
-
-
-def getMACAddress():
-    mac = ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) for ele in range(0, 48, 8)][::-1])
-    mac = mac.upper()
-    return mac
 
 
 def getFunctionResult(function, vargs, **flags):
@@ -32,8 +19,8 @@ def getFunctionResult(function, vargs, **flags):
         result = json.dumps(result)
         return result, 200
     except Exception as e:
-        print(str(e))   # should I return this?
-        return f"Bad request: {e}", 400  # should I also call home page?
+        print(str(e))
+        return f"Bad request: {e}", 400
 
 
 def addition(numbers):
