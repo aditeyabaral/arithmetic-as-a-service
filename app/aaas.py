@@ -5,7 +5,7 @@ import requests
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
-from utils import *
+from .utils import *
 
 
 app = Flask(__name__)
