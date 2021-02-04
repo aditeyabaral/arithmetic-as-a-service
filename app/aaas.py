@@ -1,7 +1,5 @@
 import flask
-import uuid
 import platform
-import requests
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col

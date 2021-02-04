@@ -1,5 +1,7 @@
 import json
 import string
+import uuid
+import requests
 import numpy as np
 from sympy import *
 from datetime import datetime
@@ -14,7 +16,7 @@ def getIPAddress():
 
 def getMACAddress():
     return ':'.join(re.findall('..', '%012x' % uuid.getnode()))
-    
+
 
 def getFunctionResult(function, vargs, **flags):
     numbers = vargs.split("/")
