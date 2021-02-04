@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
-from utils import *
+from .utils import *
 
 
 app = Flask(__name__)
