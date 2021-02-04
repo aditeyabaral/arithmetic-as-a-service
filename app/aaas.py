@@ -2,7 +2,7 @@ import os
 import flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
