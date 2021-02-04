@@ -2,7 +2,7 @@ import os
 import flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from utils import *
+from .utils import *
 
 
 app = Flask(__name__)
@@ -58,7 +58,7 @@ def getFunctionCall(url):
 def incrementCounter(function_name):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    time = datetime.now()
+    time = datetime.utcnow()
     # current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
     # current_timezone = str(time.astimezone().tzinfo)
     # access_time = f"{current_time} {current_timezone} --- {function_name}\n"
