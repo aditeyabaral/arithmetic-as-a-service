@@ -57,24 +57,21 @@ def getFunctionCall(url):
 def incrementCounter(function_name):
     with COUNTER.get_lock():
         COUNTER.value += 1
-    time = datetime.utcnow()
-    # current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
-    # current_timezone = str(time.astimezone().tzinfo)
-    # access_time = f"{current_time} {current_timezone} --- {function_name}\n"
-    # with open("record.txt", "a") as record_file:
-    #     record_file.write(access_time)
-
     data = Record(function_name)
     db.session.add(data)
     db.session.commit()
 
 
+def getCounter():
+    result = db.session.query(Record).count()
+    return result
+
+
 @app.route("/", methods=["GET"])
 def home(*vargs):
     incrementCounter("home")
-    with open("record.txt", "r") as record_file:
-        accesses = record_file.read().strip().split('\n')
-        total_accesses = len(accesses)
+    total_accesses = getCounter()
+    print(total_accesses)
     result = f'''Hello stranger!<br/>
     It seems you do not know how to use my AaaS.<br/>
     My AaaS has been used by over {total_accesses} clients for their daily needs.
