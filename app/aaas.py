@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -53,7 +53,7 @@ class Record(db.Model):
     def __init__(self, site_name):
         self.site = site_name
         self.time = datetime.utcnow()
-        self.ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)    # not getting actual public IP
+        self.ip = request.headers.getlist("X-Forwarded-For")[0]
         self.platform = request.user_agent.platform
         self.browser = request.user_agent.browser
 
@@ -88,8 +88,6 @@ def getCounter():
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    print(request.remote_addr, request.access_route)
-    print(request.headers.getlist("X-Forwarded-For"))
     incrementCounter("home")
     total_accesses = getCounter()
     print(total_accesses)
