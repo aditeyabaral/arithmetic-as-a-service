@@ -53,7 +53,7 @@ class Record(db.Model):
     def __init__(self, site_name):
         self.site = site_name
         self.time = datetime.utcnow()
-        self.ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+        self.ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)    # not getting actual public IP
         self.platform = request.user_agent.platform
         self.browser = request.user_agent.browser
 
@@ -85,6 +85,7 @@ def getCounter():
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
+    print(request.remote_addr)
     incrementCounter("home")
     total_accesses = getCounter()
     print(total_accesses)
