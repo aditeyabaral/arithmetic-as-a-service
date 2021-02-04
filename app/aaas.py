@@ -46,7 +46,8 @@ class Record(db.Model):
     ip = db.Column(db.String(20), nullable=False, default=getIPAddress)
     mac = db.Column(db.String(50), nullable=False, default=getMACAddress)
     name = db.Column(db.String(30), nullable=False, default=platform.node)
-    platform = db.Column(db.String(30), nullable=False, default=platform.system)
+    platform = db.Column(db.String(30), nullable=False,
+                         default=platform.system)
     site = db.Column(db.String(15), nullable=False)
 
     def __init__(self, site_name):

@@ -16,7 +16,7 @@ def getIPAddress():
 
 
 def getMACAddress():
-    return ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff).upper()
+    return ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff)).upper()
 
 
 def getFunctionResult(function, vargs, **flags):
