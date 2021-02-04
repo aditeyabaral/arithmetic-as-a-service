@@ -43,6 +43,7 @@ class Record(db.Model):
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     site = db.Column(db.String(15), nullable=False)
+    # add IP address, location coordinates, other tracking info?
 
     def __init__(self, site_name):
         self.site = site_name
@@ -83,10 +84,11 @@ def home(*vargs):
 
 @app.route("/logging", methods=["GET"])
 def getLogging(*vargs):
-    with open("record.txt", "r") as record_file:
-        records = record_file.read().strip().split('\n')
-        content = "<br/>".join(records)
-        return content, 200
+    '''with open("record.txt", "r") as record_file:
+        records = record_file.read().strip().split('\n')'''
+    
+    content = "<br/>".join(records)
+    return content, 200
 
 
 @app.route("/add/<path:vargs>", methods=["GET"])
