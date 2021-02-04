@@ -8,6 +8,14 @@ from multiprocessing import Value
 COUNTER = Value("i", 0)
 
 
+def getIPAddress():
+    return requests.get('https://api.ipify.org').text
+
+
+def getMACAddress():
+    return ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+    
+
 def getFunctionResult(function, vargs, **flags):
     numbers = vargs.split("/")
     try:

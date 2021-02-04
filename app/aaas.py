@@ -1,9 +1,11 @@
-import os
 import flask
+import uuid
+import platform
+import requests
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -43,8 +45,11 @@ class Record(db.Model):
     __tablename__ = "logging"
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    ip = db.Column(db.String(20), nullable=False, default=getIPAddress)
+    mac = db.Column(db.String(50), nullable=False, default=getMACAddress)
+    name = db.Column(db.String(30), nullable=False, default=platform.node)
+    platform = db.Column(db.String(30), nullable=False, default=platform.system)
     site = db.Column(db.String(15), nullable=False)
-    # add IP address, location coordinates, other tracking info?
 
     def __init__(self, site_name):
         self.site = site_name
