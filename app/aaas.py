@@ -86,9 +86,10 @@ def home(*vargs):
 def getLogging(*vargs):
     '''with open("record.txt", "r") as record_file:
         records = record_file.read().strip().split('\n')'''
-    
-    content = "<br/>".join(records)
-    return content, 200
+    result = db.session.query(Record)
+    print(result)
+    #content = "<br/>".join(records)
+    #return content, 200
 
 
 @app.route("/add/<path:vargs>", methods=["GET"])
