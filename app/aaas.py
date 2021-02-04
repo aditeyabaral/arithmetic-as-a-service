@@ -2,7 +2,7 @@ import os
 import flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -41,12 +41,11 @@ db = SQLAlchemy(app)
 class Record(db.Model):
     __tablename__ = "logging"
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    time = db.Column(db.DateTime, nullable=False)
+    time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     site = db.Column(db.String(15), nullable=False)
 
-    def __init__(self, access_time, site_name):
-        self.access_time = access_time
-        self.site_name = site_name
+    def __init__(self, site_name):
+        self.site = site_name
 
 
 def getFunctionCall(url):
@@ -65,7 +64,7 @@ def incrementCounter(function_name):
     # with open("record.txt", "a") as record_file:
     #     record_file.write(access_time)
 
-    data = Record(time, function_name)
+    data = Record(function_name)
     db.session.add(data)
     db.session.commit()
 
