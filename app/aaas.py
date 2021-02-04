@@ -65,7 +65,7 @@ def incrementCounter(function_name):
     with open("record.txt", "a") as record_file:
         record_file.write(access_time)
 
-    data = Record(access_time, function_name)
+    data = Record(time, function_name)
     db.session.add(data)
     db.session.commit()
 
