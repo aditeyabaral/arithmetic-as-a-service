@@ -89,6 +89,7 @@ def getCounter():
 @app.route("/", methods=["GET"])
 def home(*vargs):
     print(request.remote_addr, request.access_route)
+    print(request.headers.getlist("X-Forwarded-For"))
     incrementCounter("home")
     total_accesses = getCounter()
     print(total_accesses)
