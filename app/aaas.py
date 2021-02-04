@@ -2,7 +2,7 @@ import os
 import flask
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from .utils import *
+from utils import *
 
 
 app = Flask(__name__)
@@ -39,10 +39,10 @@ db = SQLAlchemy(app)
 
 
 class Record(db.Model):
-    __tablename__ = "Logging"
+    __tablename__ = "logging"
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     time = db.Column(db.DateTime, nullable=False)
-    site = db.Column(db.String(30), nullable=False)
+    site = db.Column(db.String(15), nullable=False)
 
     def __init__(self, access_time, site_name):
         self.access_time = access_time
@@ -59,11 +59,11 @@ def incrementCounter(function_name):
     with COUNTER.get_lock():
         COUNTER.value += 1
     time = datetime.now()
-    current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
-    current_timezone = str(time.astimezone().tzinfo)
-    access_time = f"{current_time} {current_timezone} --- {function_name}\n"
-    with open("record.txt", "a") as record_file:
-        record_file.write(access_time)
+    # current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
+    # current_timezone = str(time.astimezone().tzinfo)
+    # access_time = f"{current_time} {current_timezone} --- {function_name}\n"
+    # with open("record.txt", "a") as record_file:
+    #     record_file.write(access_time)
 
     data = Record(time, function_name)
     db.session.add(data)
