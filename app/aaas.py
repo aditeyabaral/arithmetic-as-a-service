@@ -86,7 +86,7 @@ def home(*vargs):
 def getLogging(*vargs):
     '''with open("record.txt", "r") as record_file:
         records = record_file.read().strip().split('\n')'''
-    result = db.session.query(Record)
+    result = db.session.query(Record).all()
     print(result)
     #content = "<br/>".join(records)
     #return content, 200
