@@ -61,6 +61,9 @@ class Record(db.Model):
 class loggingInfoTable(Table):
     __id = Col("__id", show=False)
     time = Col("time")
+    ip = Col("ip")
+    browser = Col("browser")
+    platform = Col("platform")
     site = Col("site")
 
 
@@ -85,7 +88,7 @@ def getCounter():
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    print(request.remote_addr)
+    print(request.remote_addr, request.access_route)
     incrementCounter("home")
     total_accesses = getCounter()
     print(total_accesses)
