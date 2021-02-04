@@ -8,17 +8,6 @@ from multiprocessing import Value
 COUNTER = Value("i", 0)
 
 
-def incrementCounter(function_name):
-    with COUNTER.get_lock():
-        COUNTER.value += 1
-    time = datetime.now()
-    current_time = time.strftime(r"%d/%m/%Y %H:%M:%S")
-    current_timezone = str(time.astimezone().tzinfo)
-    access_time = f"{current_time} {current_timezone} --- {function_name}\n"
-    with open("record.txt", "a") as record_file:
-        record_file.write(access_time)
-
-
 def getFunctionResult(function, vargs, **flags):
     numbers = vargs.split("/")
     try:
