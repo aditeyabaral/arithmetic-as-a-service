@@ -1,3 +1,5 @@
+import os
+import dotenv
 import flask
 from datetime import datetime
 from flask import Flask, request, render_template
@@ -5,9 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_table import Table, Col
 from .utils import *
 
+dotenv.load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://iwcgggkkrqwldt:9d6eb721bc8243d3a74ef878469ac2cc9e5701306c23e69f6018c5d6a77f9e3f@ec2-3-222-11-129.compute-1.amazonaws.com:5432/d4g3sagup0iaa6"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DB_KEY"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 function_mapper = {
